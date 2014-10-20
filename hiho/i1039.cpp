@@ -4,6 +4,7 @@
 #include<string>
 #include<algorithm>
 
+// http://hihocoder.com/problemset/problem/1039
 // here use brute force, 
 // suppose input string size is x
 // then there is 3(x + 1) kinds of cases to consider

@@ -6,6 +6,7 @@
 using namespace std;
 
 
+// http://hihocoder.com/problemset/problem/1000
 // hello world :)
 int main(){
 	int a, b;

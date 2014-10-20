@@ -5,6 +5,7 @@
 #include<sstream>
 #include<iterator>
 
+// http://hihocoder.com/problemset/problem/1051
 // one thing for sure, all card must use continuously to have the longest time
 // n holes, and m cards,
 // need O(n - m + 1) to calculate the max time 
