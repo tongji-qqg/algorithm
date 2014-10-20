@@ -1,9 +1,70 @@
 #include<iostream>
 #include<vector>
+#include<cstring>
 #include<string>
 #include<algorithm>
 
+// here use brute force, 
+// suppose input string size is x
+// then there is 3(x + 1) kinds of cases to consider
+// enumnate all cases 
+// and find the string length after eliminate
+//
+// here use string and vector while eliminate
+// for easy understand
+//
+// also can use char[], 
+// and mark all eliminated char to 'D', or something else
+// faster and smaller, but a little hard
+
 using namespace std;
+
+/////////////////////////////////////////////////
+// second implementation
+
+int getNextPos(char * buffer, int start){
+	for(int i=start;buffer[i] != '\0';i++){
+		if(buffer[i] != 'D')
+			return i;
+	}
+	return 1000;
+}
+int eliminate(string text){
+	int length = text.size();
+	char buffer[102];
+	strcpy(buffer, text.c_str());
+	bool flag = true;
+	do{
+		flag = false;
+		int pos = getNextPos(buffer,0);
+		if(pos > length)break;
+		for(int i=pos;i<length;){
+			char x = buffer[i];
+			int y = getNextPos(buffer, i+1);
+			if( y > length) break;
+			if( buffer[y] == x){
+				flag =true;
+				buffer[i] = 'D';
+				while(1){
+					if(buffer[y] == x)
+						buffer[y] = 'D';
+					else break;
+					int tmp = getNextPos(buffer, y+1);
+					if(y > length)break;
+					y = tmp;
+				}
+			}
+			i = getNextPos(buffer, y);
+		}
+	}while(flag);
+	int result = length;
+	for(int i=0;i<length;i++)
+		if(buffer[i] == 'D')
+			result--;
+	return result;
+}
+/////////////////////////////////////////////////
+// first impl
 
 int getFirstLetterNum(const string s, int index){
 	if(s.size() == 0) return 0;
@@ -43,7 +104,8 @@ int main(){
 			for(char x='A'; x<'D';x++ ){
 				string test = s.substr(0,i) + x + s.substr(i);
 				//cout << test << endl;
-				int length = process( test );
+				//int length = process( test );
+				int length = eliminate( test );
 				if(min > length) min = length;
 			}
 		}
