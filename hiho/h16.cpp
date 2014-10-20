@@ -45,9 +45,9 @@ void init(){
 	}
 	//analysis input
 	for(tableRow = 0;tableRow<25;tableRow++){ //2 ^ 24 = 16777216, 10^7
-		if( N > mi[tableRow] ) break;
+		if( N <= mi[tableRow] ) break;
 	}
-	for(int i=1;i<tableRow;i++){
+	for(int i=1;i<=tableRow;i++){
 		vector< int > & pre = table[i-1];
 		vector< int > & cur = table[i];
 		int end = pre.size();
